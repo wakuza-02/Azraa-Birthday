@@ -1,0 +1,544 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+
+/* --- WRAPPER FOR CENTERING CARD AND BUTTONS --- */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  z-index: 20;
+  overflow-y: auto; /* KEY FIX: Allows scrolling on short screens */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --- BACKGROUND SPARKLES --- */
+.background-sparkles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+.sparkle {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #fff, 0 0 10px #fff;
+  animation: twinkle 5s infinite;
+  opacity: 0;
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* --- FLOWERS --- */
+.flowers-container {
+  position: fixed;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  z-index: 10;
+  pointer-events: none;
+}
+.bouquet-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.flower-wrap {
+  position: absolute;
+  bottom: 0;
+  transform-origin: bottom center;
+  animation: sprout 2s ease-in-out 0.2s forwards,
+    wind-sway 6s ease-in-out infinite alternate;
+  opacity: 0;
+  background: transparent;
+}
+.flower {
+  width: 120px;
+  height: 170px;
+  background: transparent;
+  overflow: visible;
+}
+.stem rect {
+  fill: #3a8a7a;
+}
+/* Colors */
+.original .bloom path {
+  fill: #ff1493;
+  filter: drop-shadow(0 0 8px #ff1493) drop-shadow(0 0 15px #ff1493);
+}
+.tulip .bloom path {
+  fill: #00aaff;
+  filter: drop-shadow(0 0 10px #00aaff) drop-shadow(0 0 18px #00aaff);
+}
+.rose .bloom path {
+  fill: #f9002f;
+  filter: drop-shadow(0 0 10px #f9002f) drop-shadow(0 0 20px #f9002f);
+}
+.sunflower .bloom path {
+  fill: #ffee00;
+  filter: drop-shadow(0 0 12px #ffee00) drop-shadow(0 0 25px #ffee00);
+}
+.sunflower .bloom circle {
+  fill: #593d0f;
+  filter: drop-shadow(0 0 5px #ffcf4d);
+}
+/* Layout */
+.sunflower-main {
+  left: 50%;
+  transform: translateX(-50%) scale(1.1);
+  z-index: 20;
+  animation-delay: 0.3s;
+  animation-duration: 5s;
+}
+.rose-left {
+  left: 35%;
+  transform: rotate(-18deg) scale(0.9);
+  z-index: 18;
+  animation-delay: 0.6s;
+  animation-duration: 7s;
+}
+.rose-right {
+  left: 58%;
+  transform: rotate(18deg) scale(0.9);
+  z-index: 18;
+  animation-delay: 0.6s;
+  animation-duration: 6.5s;
+}
+.tulip-far-left {
+  left: 20%;
+  transform: rotate(-35deg) scale(0.8);
+  z-index: 16;
+  animation-delay: 0.9s;
+  animation-duration: 8s;
+}
+.tulip-far-right {
+  left: 70%;
+  transform: rotate(35deg) scale(0.8);
+  z-index: 16;
+  animation-delay: 0.9s;
+  animation-duration: 7.5s;
+}
+.original-back-left {
+  left: 10%;
+  transform: rotate(-50deg) scale(0.7);
+  z-index: 14;
+  animation-delay: 1.2s;
+  animation-duration: 9s;
+}
+.original-back-right {
+  left: 78%;
+  transform: rotate(50deg) scale(0.7);
+  z-index: 14;
+  animation-delay: 1.2s;
+  animation-duration: 8.5s;
+}
+@keyframes sprout {
+  from {
+    opacity: 0;
+    transform: translateY(150px) scale(0.3);
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes wind-sway {
+  from {
+    transform: rotate(-2deg);
+  }
+  to {
+    transform: rotate(2deg);
+  }
+}
+
+/* GRASS FIELD */
+.leaves {
+  position: absolute;
+  bottom: -15px;
+  left: -5%;
+  width: 110%;
+  height: 150px;
+  z-index: 22;
+  pointer-events: none;
+}
+.leaf {
+  position: absolute;
+  bottom: 0;
+  width: 10px;
+  background: linear-gradient(to top, #1e6b54, #3dab94);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  transform-origin: bottom center;
+  filter: drop-shadow(0 0 4px #3dab94);
+  animation: sprout 2s ease-out forwards,
+    wind-sway 5s ease-in-out infinite alternate;
+}
+/* Heights */
+.leaf:nth-child(1) {
+  left: 2%;
+  height: 40px;
+  animation-delay: 0.8s;
+  animation-duration: 6s;
+}
+.leaf:nth-child(2) {
+  left: 7%;
+  height: 60px;
+  animation-delay: 0.5s;
+  animation-duration: 4.5s;
+}
+.leaf:nth-child(3) {
+  left: 12%;
+  height: 30px;
+  animation-delay: 1s;
+  animation-duration: 5.5s;
+}
+.leaf:nth-child(4) {
+  left: 16%;
+  height: 70px;
+  animation-delay: 0.6s;
+  animation-duration: 5s;
+}
+.leaf:nth-child(5) {
+  left: 21%;
+  height: 50px;
+  animation-delay: 0.2s;
+  animation-duration: 6.5s;
+}
+.leaf:nth-child(6) {
+  left: 26%;
+  height: 80px;
+  animation-delay: 0.9s;
+  animation-duration: 4s;
+}
+.leaf:nth-child(7) {
+  left: 32%;
+  height: 60px;
+  animation-delay: 0.4s;
+  animation-duration: 5.2s;
+}
+.leaf:nth-child(8) {
+  left: 38%;
+  height: 90px;
+  animation-delay: 0.7s;
+  animation-duration: 4.8s;
+}
+.leaf:nth-child(9) {
+  left: 44%;
+  height: 65px;
+  animation-delay: 1.1s;
+  animation-duration: 5.8s;
+}
+.leaf:nth-child(10) {
+  left: 49%;
+  height: 50px;
+  animation-delay: 0.5s;
+  animation-duration: 4.6s;
+}
+.leaf:nth-child(11) {
+  left: 53%;
+  height: 70px;
+  animation-delay: 0.8s;
+  animation-duration: 5.3s;
+}
+.leaf:nth-child(12) {
+  left: 58%;
+  height: 85px;
+  animation-delay: 0.3s;
+  animation-duration: 4.2s;
+}
+.leaf:nth-child(13) {
+  left: 63%;
+  height: 55px;
+  animation-delay: 1.2s;
+  animation-duration: 6s;
+}
+.leaf:nth-child(14) {
+  left: 68%;
+  height: 75px;
+  animation-delay: 0.7s;
+  animation-duration: 4.4s;
+}
+.leaf:nth-child(15) {
+  left: 74%;
+  height: 60px;
+  animation-delay: 0.4s;
+  animation-duration: 5.6s;
+}
+.leaf:nth-child(16) {
+  left: 79%;
+  height: 90px;
+  animation-delay: 0.9s;
+  animation-duration: 4.1s;
+}
+.leaf:nth-child(17) {
+  left: 83%;
+  height: 40px;
+  animation-delay: 0.6s;
+  animation-duration: 5.9s;
+}
+.leaf:nth-child(18) {
+  left: 88%;
+  height: 65px;
+  animation-delay: 1.1s;
+  animation-duration: 4.7s;
+}
+.leaf:nth-child(19) {
+  left: 93%;
+  height: 80px;
+  animation-delay: 0.3s;
+  animation-duration: 5.1s;
+}
+.leaf:nth-child(20) {
+  left: 98%;
+  height: 50px;
+  animation-delay: 0.8s;
+  animation-duration: 4.9s;
+}
+
+/* CARD & PAGE STYLES */
+.card-container {
+  position: relative;
+  perspective: 1500px;
+  animation: cardEntrance 1s ease-out 1.8s forwards;
+  opacity: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+@keyframes cardEntrance {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.card {
+  width: 100%;
+  max-width: 1000px;
+  height: 500px;
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
+  align-items: stretch;
+}
+.page.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.page.flipping-out {
+  animation: flipOut 0.6s ease-in-out forwards;
+  opacity: 1;
+}
+.page.flipping-in {
+  animation: flipIn 0.6s ease-in-out forwards;
+  opacity: 0;
+}
+@keyframes flipOut {
+  from {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: rotateY(-180deg) scale(0.8);
+    opacity: 0;
+  }
+}
+@keyframes flipIn {
+  from {
+    transform: rotateY(180deg) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+.page-left {
+  flex: 1;
+  overflow: hidden;
+  background: #f1f1f1;
+}
+.page-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.page-right {
+  flex: 1;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+h1,
+h2 {
+  font-weight: 700;
+  color: #ff1493;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.7;
+  font-weight: 300;
+}
+p.signature {
+  font-weight: 500;
+  margin-top: 2rem;
+  font-size: 1.3rem;
+  color: #ff1493;
+}
+.page-nav {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  flex-shrink: 0;
+}
+.back-button,
+.continue-button {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+.continue-button {
+  background-color: #ff1493;
+  color: #fff;
+}
+.continue-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px -5px rgba(255, 20, 147, 0.6);
+}
+.back-button {
+  background-color: #f1f1f1;
+  color: #555;
+}
+.back-button:hover {
+  transform: translateY(-2px);
+  background-color: #e9e9e9;
+  box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 480px) {
+  .main-content {
+    justify-content: flex-start;
+  }
+  .card-container {
+    margin-top: 5vh;
+  }
+  .card {
+    height: 660px;
+    max-height: none;
+    display: flex;
+  }
+  .page {
+    flex-direction: column;
+    height: 100%;
+  }
+  .page-left {
+    height: 45%;
+    flex-shrink: 0;
+  }
+  .page-right {
+    height: 55%;
+    padding: 20px;
+    overflow-y: auto;
+    justify-content: flex-start;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  p {
+    font-size: 0.9rem;
+  }
+  .page-nav {
+    margin-top: 20px;
+  }
+  .flowers-container {
+    height: 300px;
+    bottom: -50px;
+  }
+  .flower {
+    width: 70px;
+    height: 120px;
+  }
+}
